@@ -1,0 +1,284 @@
+---
+title: "Characterizing critical habitat for vulnerable tidal marsh birds in New Hampshire"
+author: "Grace McCulloch"
+date: "2022-11-12"
+output: pdf_document
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Salt marshes are among the world’s most productive ecosystems, providing coastline protection, water filtration, carbon storage, and wildlife habitat (Barbier et al. 2011, Gedan et al. 2009; NHDES 2016). While New England has a history of salt marsh degradation and loss, accelerated rates of sea-level rise present an unprecedented threat to marsh persistence and associated ecosystem services (Gedan et al. 2011; Crosby et al. 2016; FitzGerald et al. 2021). The effects of accelerated sea-level rise are already being observed in New England (FitzGerald et al. 2021; Langston et al. 2020). Marsh composition and structure is changing, as the rate of high marsh accretion fails to keep pace with sea-level rise, converting high marsh (infrequently flooded salt marsh) to low marsh systems (salt marsh flooded at every tide) (Payne et al. 2019; Valiela et al. 2018; Raposa et al. 2017).
+
+At the same time, avian tidal marsh specialists are declining, with negative trends seen in the community as a whole (Correll et al. 2016; Klingbeil et al. 2021). Within this community the saltmarsh sparrow (*Ammospiza caudacuta*) has been identified as a conservation priority  (Correll et al. 2016; Hartley and Weldon 2020). It is listed as IUCN endangered and is a species of conservation priority for NH, the US Fish and Wildlife Service, and the Atlantic Coast Joint Venture (BirdLife International 2020; NHFG 2015; USFWS 2020; Hartley and Weldon 2020). With range wide population declines of 9% a year, saltmarsh sparrow extinction is projected by 2060, with a loss of habitat for 85% of its current population by 2050 (Corell et al. 2016; Field et al 2017; Klingbeil et al. 2021). Saltmarsh sparrows are tidal marsh obligates making them particularly vulnerable to sea-level rise and loss of habitat (Bayard and Elphick 2011; Gjerdrum et al. 2005). Saltmarsh sparrows nest in high marsh vegetation, timing their reproduction with the tidal cycle to avoid nest flooding at high marsh inundation, which occurs ~ every 28 days (Shriver et al. 2007). Their reproductive cycle (23-26 days) once fit within the tidal cycle but is now threatened by sea-level rise and high marsh decline as the window for breeding success closes (Field et al. 2017; Benvenuti et al. 2018). Population declines for other species that nest in the high marsh, including willets (*Tringa semipalmata*), are also predicted with sea-level rise (Klingbeil et al. 2021). There is also interest in examining habitat associations for more common species like wading birds, a category that includes great blue heron, great egret, snowy egret, green heron, and glossy ibis in NH, which fish in pools and panes on the saltmarsh (conversations with NHFG; Elphick 2015).
+
+In New Hampshire coastal managers are exploring ways to prioritize habitat conservation for vulnerable tidal marsh birds and site salt marsh restoration activities. Tools that predict saltmarsh sparrow habitat and/or saltmarsh resiliency include Great Bay National Estuarine Research Reserve’s (GBNEER) Habitat Prioritization Tool, the Atlantic Coast Joint Venture’s Habitat Prioritizaion Tool, and GBNERR’s Marsh Mapping Tool. These tools are being used by NH managers for planning, yet have not been ground truthed with tidal marsh bird data and may not include all of the features/factors necessary to predict their habitat. Understanding the distribution of tidal marsh birds and their habitat associations is key to future sea-level rise planning for wildlife habitat conservation in NH and a recognized research need by NH Fish and Game (NHFG 2015b). The overarching goal of this project is to is to assess the factors that predict the resilience of NH salt marshes for saltmarsh sparrows and other tidal marsh birds. The project will investigate the research question: How well do existing tools, which rank marshes based on habitat availability and likelihood of resilience to sea-level rise, and additional habitat-level factors predict saltmarsh sparrow occupancy, relative abundance, and productivity in New Hampshire? In investigating this question, the following objectives will be addressed:
+
+1.	Assess the current occupancy and relative abundance of tidal marsh birds across NH salt marshes and assess saltmarsh sparrow reproduction at a subset of occupied NH marshes.
+
+2.	Identify if and how a marsh’s ranking by the GBNERR’s Marsh Prioritization Tool, GBNERR’s Habitat Prioritization Tool, and/or ACJV’s Habitat Prioritization Tool predict saltmarsh sparrow occupancy, relative abundance, and reproduction. 
+
+3.	Document current marsh condition through vegetative surveys and other fine-scale habitat metrics, and determine their relationship with saltmarsh sparrow occupancy, relative abundance, and reproduction.
+
+For this report and portion of the project, I intend to focus on creating summary statistics from the results of the 2022 field season which will begin to address objective 1  above. I will also begin to identify relationships between saltmarsh sparrow relative abundance and habitat metrics from our field data, starting to address objective 2 above. These steps will help build my R skillset, while working with my Masters dataset. The objectives for this report are as follows:
+
+1.	Clean the datasets for effective use in R.
+
+2.	Assess current tidal marsh bird occupancy and relative abundance by creating summary statistics for the 2022 field season in R. 
+
+3.	Identify relationships between the relative abundance of sharp-tailed sparrows and the habitat metrics.
+
+If sharp-tailed sparrows select habitat based on vegetation, then survey points with a high percentage of high marsh (a plant community associated with sparrow nesting) will have a greater sharp-tailed sparrow abundance (Gjerdrum et al. 2005; Benvenuti et al. 2018). We also predict that survey points with more low marsh and *Phragmites australis* will have a lower sharp-tailed sparrow abundance, as these plants provide little suitable nesting habitat (Gjerdrum et al. 2008; Meiman et al. 2012). As for pannes, pools, and creeks, we predict low sharp-tailed sparrow abundances at both extremes. A large percentage would create a wet marsh, with little nesting habitat and frequent flooding, the primary cause of nest failure (Shriver et al. 2007). However, no or little pool habitat would not provide the pool edges that sharp-tailed sparrows often nest on.
+
+# Methods
+## Field Data Collection
+
+The full suite of tidal marsh bird data to be used in this portion of the research includes avian point counts and vegetation data collected from surveys at 88 locations throughout New Hampshire in 2022. Survey points included historical SHARP survey points and new ones added for greater areal coverage in Rye, Hampton, and Seabrook, NH. New points were identified in collaboration with GBNERR, NHFG, and NH Audubon partners. SHARP (the Saltmarsh Habitat and Avian Research Program) is a collaboration of government, academic, and private entities supporting ‘the science behind tidal marsh bird conservation’ throughout the saltmarsh sparrow’s range (www.tidalmarshbirds.org). For all of our vegetation and point count surveys we followed established SHARP protocols (see www.tidalmarshbirds.org for greater detail). 
+
+Point counts consisted of a passive five-minute bird count followed by a five-minute broadcast series with playback calls from Black Rail, Least Bittern, Sora, Virginia Rail, and Clapper Rail to ensure more secretive birds were counted. A points second survey in the breeding season was spaced at least 10 days later. We conducted surveys between sunrise and 11am, while avoiding weather that could influence detection, including rain, fog, and heavy wind. Each species observation was recorded according to the distance from the point center, in the following distance bands: within 50 meters, 50-100 meters, and over 100 meters. It is important to note that due to high hybridization between Nelson’s sparrow and saltmarsh sparrow, for the purposes of data collection and analysis observations of these species will be grouped as sharp-tailed sparrows. This is common practice in the saltmarsh sparrow hybrid zone (www.tidalmarshbirds.org).
+
+Vegetation surveys collected information on habitat factors including percent cover of community habitat class and the percent coverage by species of vegetation covering more than 5% in a given 50 meter radius circle plot. Cover classes were divided into the following percent ranges: 0%, <1%, 1-5%, 6-10%, 11-25%, 26-50%, 51-75%, and 76-100%. Cover class categories included: low marsh, high marsh, saltmarsh or brackish terrestrial boarder, invasive species, panes/pools/creeks, open water, upland, and wrack. All vegetation surveys were conducted during the second point count survey at a survey point.
+
+## Analysis
+
+Data analysis was conducted in R. Summary statistics were created for the 2022 field season. This included the total number of occurrences across the two survey visits and distance bands for the following species or bird groups: Virginia rail, purple martin, glossy ibis, marsh wren, yellowlegs, great blue heron, osprey, Eastern willet, great egret, snowy egret, and sharp-tailed sparrows (including Neslson's, saltmarsh, and hybrid sparrows). These birds of focus were selected based on habitat requirments, conservation status, and/or specific interest from project stakeholders including New Hampshire Fish and Game and New Hampshire Audubon (NHFG 2015; ACJV 2019). Nelson's sparrow, saltmarsh sparrow, Eastern willet, and purple martin are all species of special concern for NH (NHFG 2015). The marsh wren is also a species of greatest conservation need for NH (NHFG 2015). 
+
+Data analysis also included the total number of sharp-tailed sparrow occurrences, broken down into Nelson's and saltmarsh sparrow categories to compare the number of confirmed Nelson's and saltmarsh sparrow identifications to the general sharp-tailed sparrow category where differences could not be distinguished in the field or hybridization had occurred. Summary statistics also included the percent of sites occupied by sharp-tailed sparrows, wading birds, and Eastern willets and the mean number of occurrences per survey point for each of the bird groups.
+
+Categorical regressions were also used to examine the relationship between the following cover class types: high marsh, low marsh, pannes/pools/creeks/ and *Phragmites australis* and sharp-tailed sparrow relative abundance. In this analysis only detections within the 50 meter radius distance band were used. *Please note that I did not run the correct model in the results section below. These models do not account for count data.I am planning to work with Easton to find the right kind of model to run.*
+
+## Results
+### 2022 Field Season Summary
+```{r library, message=FALSE, echo=FALSE}
+library(dplyr)
+library(palmerpenguins)
+library(tidyverse)
+
+```
+
+```{r birdcleaning, message=FALSE, echo=FALSE}
+birds <- read.csv("2021&2022BirdData.csv", stringsAsFactors = TRUE)
+#cleaning the bird data, leaving just what I need for analysis
+clean_birds1 <- birds %>% 
+  select("PointID", "Point_X", "Point_Y", "VisitNum", "SurveyDate", "AlphaCode", "DistBand", "TotalCount") %>% 
+  separate(SurveyDate, c("Month", "Day", "Year")) %>%
+  select(!"Day") %>% 
+  select(!"Month") %>%  
+  filter(Year == "22") %>%
+  mutate( VisitNum = as.factor(VisitNum)) %>% 
+  filter(!is.na(DistBand))
+
+STSPTotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("STSP", "SALS", "NESP")])
+STSPjustTotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("STSP")])
+SALSTotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("SALS")])
+NESPTotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("NESP")])
+YellowlegsTotal <-sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("UNYE", "GRYE","LEYE")])
+GLIBTotal <-sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("GLIB")])
+WILLTotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("WILL")])
+VIRATotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("VIRA")])
+GBHETotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("GBHE")])
+SNEGTotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("SNEG")])
+GREGTotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("GREG")])
+OSPRTotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("OSPR")])
+MAWRTotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("MAWR")])
+PUMATotal <- sum(clean_birds1$TotalCount[clean_birds1$AlphaCode %in% c("PUMA")])
+
+allbirds <- sum(clean_birds1$TotalCount)
+
+```
+
+In the 2022 field season we recorded `r allbirds` bird occurrences, across two survey visits to each of the 88 point count locations in New Hampshire. Total occurrences for our species of focus varied greatly from `r VIRATotal` Virginia rail to `r STSPTotal` sharp-tailed sparrows (Figure 1). For New Hampshire species of special concern or greatest conservation need, total occurrence counts were `r WILLTotal` willets, `r MAWRTotal` marsh wrens, and `r PUMATotal` purple martins (Figure 1).
+
+```{r total count by species, message=FALSE, echo=FALSE}
+test3<- data.frame (Species = c('Virginia Rail', 'Purple Martin', 'Glossy Ibis', 'Marsh Wren', 'Yellowlegs','Great Blue Heron','Osprey', 'Eastern Willet','Great Egret','Snowy Egret', 'Sharp-tailed Sparrows'), Count_Total = c(VIRATotal, PUMATotal, GLIBTotal, MAWRTotal, YellowlegsTotal, GBHETotal, OSPRTotal, WILLTotal, GREGTotal, SNEGTotal, STSPTotal))
+
+afe_colorblind_palette <- c("#88CCEE", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888")
+ggplot(data= test3, aes(x= fct_inorder(Species), y= Count_Total, fill= Species))+ 
+  geom_bar(stat="identity")+ scale_fill_manual(values= afe_colorblind_palette)+
+  geom_text(aes(label= Count_Total), vjust= 1.5, color= "white")+
+  scale_x_discrete(guide = guide_axis(n.dodge=3))+
+  labs(x = "Species", y = "Total Count", 
+     color = "Species")
+
+```
+Figure 1. Total number of occurrences across 88 salt marsh locations in New Hampshire for the following species or bird groups: Virginia rail, purple martin, glossy ibis, marsh wren, yellowlegs, great blue heron, osprey, Eastern willet, great egret, snowy egret, and sharp-tailed sparrows. Totals reflect counts from two, 10 minute point count surveys per location in the summer of 2022. Point count surveys followed established Saltmarsh Habitat and Avian Research Program protocols (www.tidalmarshbirds.org).
+
+```{r STSP breakdown, message=FALSE, echo=FALSE}
+test4<- data.frame (Species = c('Nelsons Sparrows', 'Saltmarsh Sparrows', 'Sharp-tailed Sparrows', 'Total Sparrows'), Count_Total = c(NESPTotal, SALSTotal, STSPjustTotal, STSPTotal))
+
+ggplot(data= test4, aes(x= Species, y= Count_Total, fill= Species))+ 
+  geom_bar(stat="identity")+ scale_fill_manual(values= afe_colorblind_palette)+
+  geom_text(aes(label= Count_Total), vjust= -0.5, color= "black")+ labs(x = "Species", y = "Total Count",color = "Species")+scale_x_discrete(guide = guide_axis(n.dodge=2))
+```
+Figure 2. Total count of saltmarsh sparrow (*Ammospiza caudacuta*), Nelson's sparrow (*Ammospiza nelsoni*), and unidentified sharp-tailed sparrow occurrences across 88 saltmarsh locations in New Hampshire. Green colomn represents the total count of all Sharp-tailed sparrow occurrences. Total count determined from two, 10 minute point count surveys per location in the summer of 2022. Point count surveys followed established Saltmarsh Habitat and Avian Research Program protocols (www.tidalmarshbirds.org).
+
+```{r mean, message=FALSE, echo=FALSE}
+STSP50 <- read.csv("2022_STSP_0-50.csv")
+WILL50 <- read.csv("2022_WILL_0-50.csv")
+WADEALL <- read.csv("2022_Wading_Birds_AllDist.csv")
+WILLALL <- read.csv("2022_WILL_AllDist.csv")
+STSPALL <- read.csv("STSP_AllDist.csv")
+
+veg <- read.csv("2021&2022Veg.csv", stringsAsFactors = TRUE)
+#cleaning the veg data, leaving just what I need for analysis
+clean_veg <- veg %>% 
+  select("BirdPtID", "Date","LowMarshCC", "HighMarshCC", "SaltMarshTBorderCC", "BrackishTBorderCC", "InvasivesCC", "PannesChannelsCC", "UplandCC", "Wrack", "OpenWater", "DeadSnags", "DomSp1", "Sp1Percent", "DomSp2", "Sp2Percent","DomSp3", "Sp3Percent","DomSp4", "Sp4Percent","DomSp5", "Sp5Percent","DomSp6", "Sp6Percent",) %>% rename(PointID= "BirdPtID") %>% 
+  separate(Date, c("Month", "Day", "Year")) %>%
+  select(!"Day") %>% 
+  select(!"Month") %>%  
+  filter(Year == "22") %>% 
+  mutate(Year = as.factor(Year)) %>% 
+  mutate(LowMarshCC = as.factor(LowMarshCC), HighMarshCC = as.factor(HighMarshCC), SaltMarshTBorderCC = as.factor(SaltMarshTBorderCC), BrackishTBorderCC = as.factor(BrackishTBorderCC), InvasivesCC = as.factor(InvasivesCC), PannesChannelsCC = as.factor(PannesChannelsCC), UplandCC = as.factor(UplandCC), Wrack = as.factor(Wrack))
+
+clean_veg$HighMarshCC<-recode_factor(clean_veg$HighMarshCC, "0" = "0%", "0.5" = ">1%", "1" = "1-5%", "2" = "6-10%", "3"= "11-25%" , "4" = "26-50%", "5" = "51-75%", "6" = "76-100%")
+clean_veg$LowMarshCC<-recode_factor(clean_veg$LowMarshCC, "0" = "0%", "0.5" = ">1%", "1" = "1-5%", "2" = "6-10%", "3"= "11-25%" , "4" = "26-50%", "5" = "51-75%", "6" = "76-100%")
+clean_veg$InvasivesCC<-recode_factor(clean_veg$InvasivesCC, "0" = "0%", "0.5" = ">1%", "1" = "1-5%", "2" = "6-10%", "3"= "11-25%" , "4" = "26-50%", "5" = "51-75%", "6" = "76-100%")
+clean_veg$PannesChannelsCC<-recode_factor(clean_veg$PannesChannelsCC, "0" = "0%", "0.5" = ">1%", "1" = "1-5%", "2" = "6-10%", "3"= "11-25%" , "4" = "26-50%", "5" = "51-75%", "6" = "76-100%")
+alldata <- clean_veg %>% 
+  left_join(STSP50) %>% 
+  left_join(WILL50) %>% 
+  left_join(WILLALL) %>% 
+  left_join(WADEALL) %>% 
+  left_join(STSPALL)
+
+alldata<- alldata %>% rename("STSP_Total_50m" = "Total_STSP_0.50","WILL_Total_50m" = "Total_WILL_0.50", "WILL_Total_AllDist" = "Willet_AllDist", "STSP_Total_AllDist"= "STSP_AllDist")
+
+alldata$STSP_Total_50m[is.na(alldata$STSP_Total_50m)]=0
+alldata$WILL_Total_50m[is.na(alldata$WILL_Total_50m)]=0
+alldata$WILL_Total_AllDist[is.na(alldata$WILL_Total_AllDist)]=0
+alldata$Total_Wading_AllDist[is.na(alldata$Total_Wading_AllDist)]=0
+alldata$STSP_Total_AllDist[is.na(alldata$STSP_Total_AllDist)]=0
+
+meanSTSP <- round(mean(alldata$STSP_Total_AllDist),2)
+meanWILL <- round(mean(alldata$WILL_Total_AllDist),2)
+meanWade <- round(mean(alldata$Total_Wading_AllDist),2)
+
+test6<- data.frame (Species = c('Sharp-tailed Sparrows', 'Willets', 'Wading Birds'), Mean = c(meanSTSP, meanWILL, meanWade))
+
+ggplot(data= test6, aes(x= Species, y= Mean, fill= Species))+ 
+  geom_bar(stat = "identity")+
+  scale_fill_manual(values= afe_colorblind_palette)+ 
+  geom_text(aes(label= Mean), vjust= 1.5, color= "white")+
+  labs(y = "Mean Occurences per Survey Point")
+
+```
+Figure 3. Mean total count of sharp-tailed sparrows, wading birds, and Eastern willets (*Tringa semipalmata*) at 88 point count locations in New Hampshire. Total counts are summed across two, 10 minute point count surveys per location conducted in the summer of 2022. Point count surveys followed established Saltmarsh Habitat and Avian Research Program protocols (www.tidalmarshbirds.org). Sharp-tailed sparrows included saltmarsh sparrows (*Ammospiza caudacuta*), Nelson's sparrows (*Ammospiza nelsoni*), and hybrids. Wading birds included great blue heron (*Ardea herodias*), great egret (*Ardea alba*), snowy egret (*Egretta thula*), green heron (*Butorides virescens*), and glossy ibis (*Plegadis falcinellus*).
+
+```{r occupancy, message=FALSE, echo=FALSE}
+STSPoccupied <- round(sum(alldata$STSP_Total_AllDist > 0)/88,3)
+WILLoccupied <- round(sum(alldata$WILL_Total_AllDist > 0)/88,3)
+Wadingoccupied <- round(sum(alldata$Total_Wading_AllDist >0)/88,3)
+
+test5 <- data.frame (Species = c('Sharp-tailed Sparrows','Wading Birds', 'Willets'), Occupancy = c(STSPoccupied, Wadingoccupied, WILLoccupied))
+
+ggplot(data= test5, aes(x= Species, y= Occupancy, fill= Species))+ 
+  geom_bar(stat = "identity")+scale_fill_manual(values= afe_colorblind_palette)+ geom_text(aes(label= Occupancy), vjust= 1.5, color= "white")
+```
+Figure 4. Occupancy of sharp-tailed sparrows, wading birds, and Eastern willets (*Tringa semipalmata*) at 88 point count locations in New Hampshire. Occupancy determined from two, 10 minute point count surveys per location conducted in the summer of 2022. Point count surveys followed established Saltmarsh Habitat and Avian Research Program protocols (www.tidalmarshbirds.org). Sharp-tailed sparrows included saltmarsh sparrows (*Ammospiza caudacuta*), Nelson's sparrows (*Ammospiza nelsoni*), and hybrids. Wading birds included great blue heron (*Ardea herodias*), great egret (*Ardea alba*), snowy egret (*Egretta thula*), green heron (*Butorides virescens*), and glossy ibis (*Plegadis falcinellus*).
+
+Sharp-tailed sparrow occurrences (`r test4[4,2]`) included `r test4[1,2]` Nelson's sparrows, `r test4[2,2]` saltmarsh sparrows, and `r test4[3,2]` hybrid or unidentified sharp-tailed sparrows (Figure 2). The mean number of occurrences for the focal bird groups ranged from `r test6[1,2]` sharp-tailed sparrows to `r test6[3,2]` wading birds (Figure 3). Occupancy across the 88 points was for sharp tailed sparrows, wading birds, and willets was `r (test5)[1,2]`, `r (test5)[2,2]`, and `r (test5)[3,2]`, respectively (Figure 4).
+
+
+```{r STSP_High_Marsh_Model, message=FALSE, echo=FALSE}
+STSPHighMarshmod <- lm(data = alldata, formula = STSP_Total_50m ~ HighMarshCC)
+ggplot(data= alldata, aes(x = HighMarshCC, y = STSP_Total_50m, color = HighMarshCC))+
+  geom_point()+
+  geom_smooth(method= 'lm')+ 
+  geom_boxplot()+
+  labs(x = "High Marsh Cover", y = "Sharp-tailed Sparrow Occurences", color="High Marsh Cover")+
+  scale_color_manual(values= afe_colorblind_palette)
+STSPHighMarshsum<- summary(STSPHighMarshmod)
+
+```
+
+Figure 5. Mean sharp-tailed sparrow occurrences relative to the percent of high marsh cover within the 50 meter radius survey plots.
+
+```{r saltmarsh sparrow pools/creeks/channels model, message=FALSE, echo=FALSE}
+STSPPannesChannelsCCmod <- lm(data = alldata, formula = STSP_Total_50m ~ PannesChannelsCC)
+ggplot(data= alldata, aes(x = PannesChannelsCC, y = STSP_Total_50m, color = PannesChannelsCC))+
+  geom_point()+geom_smooth(method= 'lm')+ 
+  geom_boxplot() +labs(x = "Water Feautures", y = "Sharp-tailed Sparrow Occurences", color = "Water Features")+
+  scale_color_manual(values= afe_colorblind_palette)
+
+STSPPannesChannelsCCsum<-summary(STSPPannesChannelsCCmod)
+```
+
+Figure 6. Mean sharp-tailed sparrow occurrences relative to the percent of water feature (pannes, pools, and creeks) coverage within the 50 meter radius survey plots.
+
+```{r saltmarsh sparrow low marsh model, message=FALSE, echo=FALSE}
+STSPLowMarshmod <- lm(data = alldata, formula = STSP_Total_50m ~ LowMarshCC)
+ggplot(data= alldata, aes(x = LowMarshCC, y = STSP_Total_50m, color = LowMarshCC))+
+  geom_point()+geom_smooth(method= 'lm')+ 
+  geom_boxplot()+
+  labs(x = "Low Marsh Cover", y = "Sharp-tailed Sparrow Occurences", color="Low Marsh Cover")+
+  scale_color_manual(values= afe_colorblind_palette)
+
+STSPLowMarshsum<- summary(STSPLowMarshmod)
+```
+Figure 7. Mean sharp-tailed sparrow occurrences relative to the percent of low marsh cover within the 50 meter radius survey plots. No significant relationship was found.
+
+```{r saltmarsh sparrow invasives model, message=FALSE, echo=FALSE}
+STSPInvasivesCCmod <- lm(data = alldata, formula = STSP_Total_50m ~ InvasivesCC)
+ggplot(data= alldata, aes(x = InvasivesCC, y = STSP_Total_50m, color = InvasivesCC))+
+  geom_point()+geom_smooth(method= 'lm')+ 
+  geom_boxplot()+labs(x = "Invasive Cover", y = "Sharp-tailed Sparrow Occurences", color="Invasive Cover")+
+  scale_color_manual(values= afe_colorblind_palette)
+
+STSPInvasivesCCsum <- summary(STSPInvasivesCCmod)
+```
+Figure 8. Mean sharp-tailed sparrow occurrences relative to the percent of invasive *Phragmites australis* cover within the 50 meter radius survey plots.
+
+For the high marsh model the mean number of sharp-tailed sparrows was only significantly different  from the y intercept only for the highest category of coverage (76-100%) (p= `r coef(STSPHighMarshsum)[7,4]`). For the pannes, pools, and creek model the mean number of sharp-tailed sparrows was only significantly different from the y intercept for the 6-10% category of coverage (p= `r coef(STSPPannesChannelsCCsum)[3,4]`). No significant relationships were identified in the low marsh model. For the invasives model the mean number of sharp-tailed sparrows was significantly different (p= `r coef(STSPInvasivesCCsum)[4,4]`) from the y intercept only for the 6-10% category of coverage, though this may be because only a few of the survey points had 6-10% invasive coverage.
+
+
+
+# Bibliography
+Atlantic Coast Joint Venture (ACJV). 2019. Salt Marsh Bird Conservation Plan. https://www.acjv.org/documents/salt_marsh_bird_plan_final_web.pdf.
+
+Bayard, T. S., and C. S. Elphick. 2011. Planning for sea-level rise: quantifying patterns of saltmarsh sparrow (Ammodramus caucutus) nest flooding under current sea-level conditions. The Auk, 128(2): 393-403.
+
+BirdLife International. 2020. Ammospiza caudacuta. The IUCN Red List of Threatened Species 2020: T22721129A180407945. https://dx.doi.org/10.2305/IUCN.UK.2020-3.RLTS.T22721129A180407945.en. Accessed December 4, 2021.
+
+Benvenuti, B., J. Walsh, K. M. O’Brien, and A. I. Kovach. 2018. Plasticity in nesting adaptions of a tidal marsh endemic bird. Ecology and Evolution, 8:10780-10793.
+
+Correll, M. D., W. A. Wiest, T. P. Hodgman, W. G. Shriver, C. S. Elphick, B. J. McGill, K. M. O’Brien, and B. J. Olsen. 2016. Predictors of. Specialist avifaunal decline in coastal marshes. Conservation Biology, 31(1): 172-182.
+
+Crosby, S. C., D. F. Sax, M. E.  Palmer, H. S. Booth, L. A. Deegan, M. D. Bertness, and H. M. Leslie. 2016. Salt marsh persistence is threatened by predicted sea-level rise. Estuarine, Coastal and Shelf Science, 181: 93-99.
+
+Elphick, C. S., S. Meiman, and M. A. Rubega. 2015. Tidal-flow restoration provides little nesting habitat for a globally vulnerable saltmarsh bird: Bird responses to tidal-flow restoration. Restoration Ecology, 23:439–446.
+
+Field, C. R., T. S. Bayard, C. Gjerdrum, J. M. Hill, S. Meiman, and C. S. Elphick. 2017. High-resolution tide projections reveal extinction threshold in response to sea-level rise. Global Change Biology, 23: 2058-2070.
+
+Fitzgerald, D. M., C. J. Hein, J. E. Connell, Z. J. Hughes, I. Y. Georgiou, and A. B. Novak. 2021. Largest marsh in New England near a precipice. Geomorphology, 379: 107625.
+
+Gedan, K. B., B. R. Silliman, and M. D. Bertness. 2009. Centuries of human-driven change in salt marsh ecosystems. Annual Review of Marine Science, 1:117-141.
+
+Gjerdrum, C., C. S. Elphick, and M. Rubega. 2005. Nest site selection and nesting success in the saltmarsh breeding sparrows: the importance of nest habitat, timing, and study site differences. The Condor, 107: 849-862.
+
+Hartley, M. J., and A. J. Weldon, eds. 2020. Saltmarsh sparrow conservation plan. Atlantic Coast Joint Venture, acjv.org/documents/SALS_plan_final.pdf.
+
+Klingbeil, B. T., J. B. Cohen, M. D. Correll, C. R. Field, T. P. Hodgman, A. I. Kovach, E. E. Lentz, B. J. Olsen, W. G. Shiver, W. A. West, and C. S. Elphick. 2021. High uncertainty over the future of tidal marsh birds under current sea-level rise projections. Biodiversity and Conservation, 30: 431-443.
+
+Langston, A. K., O. D. Vinent, E. R. Herbert, and M. L. Kirwan. 2020. Modeling long‐term salt marsh response to sea level rise in the sediment‐deficient Plum Island Estuary. Limnology and Oceanography, 65: 2142-2157.
+
+New Hampshire Fish and Game (NHFG). 2015. New Hampshire Wildlife Action Plan, Appendix A: Birds. https://www.wildlife.state.nh.us/wildlife/profiles/wap/birds.pdf 
+
+New Hampshire Department of Environmental Services (NHDES). 2016. How people benefit from New Hampshire’s Great Bay Esturary: a collaborative assessment of the value of ecosystem services and how our decisions might affect those values in the future.
+
+Payne, A. R., D. M. Burdick, and G. E. Moore. 2019. Potential effects of sea-level rise on salt marsh elevation dynamics in a New Hampshire esturary. Estuaries and Coasts, 42: 1405-1418.
+
+Raposa, K. B., R. L. J. Weber, M. C. Ekberg, and W. Ferguson. 2017. Vegetation dynamics in Rhode Island salt marshes during a period of accelerating sea-level rise and extreme sea level events. Esturaries and Coasts, 40:640-650.
+
+Shriver, W. G., P. D. Vickery, T. P. Hodgman, and J. P. Gibbs. 2007. Flood tides affect breeding ecology of two sympatric sharp-tailed sparrows. The Auk, 124(2): 552-560.
+
+U.S. Fish and Wildlife Service (USFWS). 2020. Report on the current conditions for the saltmarsh sparrow. August 2020. U.S. Fish and Wildlife Service, Northeast Region, Charlestown, RI. 106 106 pp.
+
+Valiela, I., J. Lloret, T. Bowyer, S. Miner, D. Remsen, E. Elmstrom, C. Cogswell, and E. R. Thieler. 2018. Transient coastal landscapes: rising sea level threatens salt marshes. Science of the Total Environment, 640-641: 1148-1156.
+
+
+
+
